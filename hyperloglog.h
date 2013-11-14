@@ -22,7 +22,7 @@ class HyperLogLog {
                 e = m_*log((double)m_/zeros);
             }
         } else if (e > pow(2, 32)/30.0) {
-            e = log(1 - e/pow(2, 32))*pow(2, 32)*-1;
+            e = log1p(e*-1/pow(2, 32))*pow(2, 32)*-1;
         }
         return e;
     }
