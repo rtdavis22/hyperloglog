@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstdint>
+#include <map>
 #include <vector>
 
 class HyperLogLog {
@@ -59,6 +60,20 @@ class HyperLogLog {
                 count++;
         }
         return count;
+    }
+
+    std::map<int, int>* histogram() const {
+        std::map<int, int>* h = new std::map<int, int>;
+
+        for (auto m : ms_) {
+            if (h->find(m) != h->end()) {
+                h->at(m)++;
+            } else {
+                (*h)[m] = 1;
+            }
+        }
+
+        return h;
     }
 
     int b() const { return b_; }
